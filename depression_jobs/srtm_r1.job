@@ -12,4 +12,4 @@ module load mvapich2_ib
 
 find /oasis/scratch/comet/rbarnes1/temp_project/srtm_r1_output -type f -delete
 
-mpirun /home/rbarnes1/temp/parallel_pit_fill.exe many @evict /home/rbarnes1/dist_flats/parallel_flats.exe /oasis/scratch/comet/rbarnes1/temp_project/srtm_region/Region_01/orig/Region_01.layout /oasis/scratch/comet/rbarnes1/temp_project/srtm_r1_output/%f.tif
+mpirun /home/rbarnes1/temp/parallel_pit_fill.exe many @evict /oasis/scratch/comet/rbarnes1/temp_project/srtm_region/Region_01/orig/Region_01.layout /oasis/scratch/comet/rbarnes1/temp_project/srtm_r1_output/%f.tif
