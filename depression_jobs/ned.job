@@ -1,0 +1,15 @@
+#!/bin/bash  
+#SBATCH --job-name="ned"  
+#SBATCH --output="ned.%j.%N.out"  
+#SBATCH --partition=compute  
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=24  
+#SBATCH --export=ALL  
+#SBATCH -t 04:00:00
+
+module load intel/2015.2.164
+module load mvapich2_ib
+
+find /oasis/scratch/comet/rbarnes1/temp_project/ned_output/ -type f -delete
+
+mpirun /home/rbarnes1/temp/parallel_pit_fill.exe many @evict /oasis/scratch/comet/rbarnes1/temp_project/ned/orig/ned_tiles.layout /oasis/scratch/comet/rbarnes1/temp_project/ned_output/%f.tif
