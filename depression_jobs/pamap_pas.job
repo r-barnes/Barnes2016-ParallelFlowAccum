@@ -7,9 +7,12 @@
 #SBATCH --export=ALL  
 #SBATCH -t 01:00:00
 
-module load intel/2015.2.164
-module load mvapich2_ib
+gMPI=mpirun
+gEXE=/home/rbarnes1/temp/parallel_pit_fill.exe
+gONEMANY=many
+gEVICT=@evict
+gDATASET=pamap_pas
+gLAYER=orig
+gOUTLAYER=filled
 
-find /oasis/scratch/comet/rbarnes1/temp_project/pas_output/ -type f -delete
-
-mpirun /home/rbarnes1/temp/parallel_pit_fill.exe many @evict /oasis/scratch/comet/rbarnes1/temp_project/pamap/pas/orig/pas_tiles.layout /oasis/scratch/comet/rbarnes1/temp_project/pas_output/%f.tif
+. ./generic_job

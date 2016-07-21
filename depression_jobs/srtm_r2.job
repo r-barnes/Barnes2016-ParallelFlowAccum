@@ -5,11 +5,14 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24  
 #SBATCH --export=ALL  
-#SBATCH -t 00:02:00
+#SBATCH -t 00:30:00
 
-module load intel/2015.2.164
-module load mvapich2_ib
+gMPI=mpirun
+gEXE=/home/rbarnes1/temp/parallel_pit_fill.exe
+gONEMANY=many
+gEVICT=@evict
+gDATASET=srtm_r2
+gLAYER=orig
+gOUTLAYER=filled
 
-find /oasis/scratch/comet/rbarnes1/temp_project/srtm_r2_output -type f -delete
-
-mpirun /home/rbarnes1/temp/parallel_pit_fill.exe many @evict /oasis/scratch/comet/rbarnes1/temp_project/srtm_region/Region_02/orig/Region_02.layout /oasis/scratch/comet/rbarnes1/temp_project/srtm_r2_output/%f.tif
+. ./generic_job
