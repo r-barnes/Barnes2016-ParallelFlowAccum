@@ -15,4 +15,4 @@ gDATASET=srtm_g
 gLAYER=orig
 gOUTLAYER=filled
 
-. ./generic_job
+. ./generic_job.sh
