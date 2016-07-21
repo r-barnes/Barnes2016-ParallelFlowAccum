@@ -5,10 +5,15 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=24  
 #SBATCH --export=ALL  
-#SBATCH -t 10:00:00
+#SBATCH -t 20:00:00
 
 module load boost/1.55.0
 module load intel/2015.2.164
 module load mvapich2_ib
 
-/home/rbarnes1/temp/parallel_flats.exe /oasis/scratch/comet/rbarnes1/temp_project/pamap/pan/filled/pan_tiles.layout                         500  /oasis/scratch/comet/rbarnes1/temp_project/temp/pan-%f.tif /oasis/scratch/comet/rbarnes1/temp_project/pan_output/%f-d8.tif noflip
+rm -rf   /oasis/scratch/comet/rbarnes1/temp_project/temp/pamap_pan
+mkdir -p /oasis/scratch/comet/rbarnes1/temp_project/temp/pamap_pan
+rm -rf   /oasis/scratch/comet/rbarnes1/temp_project/output/pamap_pan
+mkdir -p /oasis/scratch/comet/rbarnes1/temp_project/output/pamap_pan
+
+/home/rbarnes1/temp/parallel_flats.exe /oasis/scratch/comet/rbarnes1/temp_project/pamap/pan/filled/pan_tiles.layout                         500  /oasis/scratch/comet/rbarnes1/temp_project/temp/pamap_pan/pan-%f.tif /oasis/scratch/comet/rbarnes1/temp_project/output/pamap_pan/%f-d8.tif noflip
