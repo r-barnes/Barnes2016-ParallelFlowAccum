@@ -13,5 +13,6 @@ gONEMANY=many
 gEVICT=@evict
 gDATASET=pamap_pan
 gLAYER=d8
+gOUTLAYER=accum
 
-. ./generic_job
+. ./generic_job.sh
