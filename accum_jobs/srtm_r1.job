@@ -1,0 +1,17 @@
+#!/bin/bash  
+#SBATCH --job-name="srtm_r1"  
+#SBATCH --output="srtm_r1.%j.%N.out"  
+#SBATCH --partition=compute  
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24  
+#SBATCH --export=ALL  
+#SBATCH -t 00:30:00
+
+gMPI=mpirun
+gEXE=/home/rbarnes1/temp/parallel_d8_accum.exe
+gONEMANY=many
+gEVICT=@evict
+gDATASET=srtm_r1
+gLAYER=d8
+
+. ./generic_job

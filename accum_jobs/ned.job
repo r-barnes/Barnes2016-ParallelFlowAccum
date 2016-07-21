@@ -1,0 +1,17 @@
+#!/bin/bash  
+#SBATCH --job-name="ned"  
+#SBATCH --output="ned.%j.%N.out"  
+#SBATCH --partition=compute  
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24  
+#SBATCH --export=ALL  
+#SBATCH -t 01:00:00
+
+gMPI=mpirun
+gEXE=/home/rbarnes1/temp/parallel_d8_accum.exe
+gONEMANY=many
+gEVICT=@evict
+gDATASET=ned
+gLAYER=d8
+
+. ./generic_job
