@@ -16,4 +16,4 @@ mkdir -p /oasis/scratch/comet/rbarnes1/temp_project/temp/ned
 rm -rf   /oasis/scratch/comet/rbarnes1/temp_project/output/ned
 mkdir -p /oasis/scratch/comet/rbarnes1/temp_project/output/ned
 
-/home/rbarnes1/temp/parallel_flats.exe /oasis/scratch/comet/rbarnes1/temp_project/ned/filled/ned_tiles.layout                               101  /oasis/scratch/comet/rbarnes1/temp_project/temp/ned/ned-%f.tif /oasis/scratch/comet/rbarnes1/temp_project/output/ned/%f-d8.tif noflip
+/home/rbarnes1/temp/parallel_flats.exe /oasis/scratch/comet/rbarnes1/temp_project/ned/filled/ned_tiles.layout                               101  /scratch/$USER/$SLURM_JOBID/%f.tif /oasis/scratch/comet/rbarnes1/temp_project/output/ned/%f-d8.tif noflip
