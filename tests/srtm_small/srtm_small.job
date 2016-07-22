@@ -1,0 +1,19 @@
+#!/bin/bash  
+#SBATCH --job-name="srtm_small"  
+#SBATCH --output="srtm_small.%j.%N.out"  
+#SBATCH --partition=compute  
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24  
+#SBATCH --export=ALL  
+#SBATCH -t 00:01:00
+
+module load intel/2015.2.164
+module load mvapich2_ib
+
+mpirun /home/rbarnes1/dist_pf/parallel_pit_fill.exe many @offloadall /oasis/scratch/comet/rbarnes1/temp_project/srtm_region/Region_03/nasa_srtm3_small.layout /oasis/scratch/comet/rbarnes1/temp_project/srtm_output/Region_01-%n.tif
+
+mpirun /home/rbarnes1/dist_pf/parallel_pit_fill.exe many @retainall /oasis/scratch/comet/rbarnes1/temp_project/srtm_region/Region_03/nasa_srtm3_small.layout /oasis/scratch/comet/rbarnes1/temp_project/srtm_output/Region_01-%n.tif
+
+mpirun /home/rbarnes1/dist_pf/parallel_pit_fill.exe many /scratch/$USER/$SLURM_JOBID/temp-%n /oasis/scratch/comet/rbarnes1/temp_project/srtm_region/Region_03/nasa_srtm3_small.layout /oasis/scratch/comet/rbarnes1/temp_project/srtm_output/Region_01-%n.tif
+
+ls /scratch/$USER/$SLURM_JOBID

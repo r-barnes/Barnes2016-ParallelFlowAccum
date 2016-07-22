@@ -1,0 +1,15 @@
+#!/bin/bash  
+#SBATCH --job-name="srtm_r1"  
+#SBATCH --output="srtm_r1_offload.%j.%N.out"  
+#SBATCH --partition=compute  
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24  
+#SBATCH --export=ALL  
+#SBATCH -t 00:02:00
+
+module load intel/2015.2.164
+module load mvapich2_ib
+
+find /oasis/scratch/comet/rbarnes1/temp_project/srtm_r1_output/ -type f -delete
+
+mpirun /home/rbarnes1/dist_pf/parallel_pit_fill.exe many @evict /oasis/scratch/comet/rbarnes1/temp_project/srtm_region/Region_01/orig/Region_01.layout /oasis/scratch/comet/rbarnes1/temp_project/srtm_r1_output/%f.tif

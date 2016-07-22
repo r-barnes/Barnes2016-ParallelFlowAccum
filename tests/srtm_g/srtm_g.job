@@ -1,0 +1,96 @@
+#!/bin/bash  
+#SBATCH --job-name="pamap_pan"  
+#SBATCH --output="pamap_pan.%j.%N.out"  
+#SBATCH --partition=compute  
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=24  
+#SBATCH --export=ALL  
+#SBATCH -t 48:00:00
+
+gMPI=mpirun
+gEXE=/home/rbarnes1/temp/parallel_d8_accum.exe
+gLAYOUTNAME=layout.layout
+gONEMANY=many
+gEVICT=@evict
+gDATASET=srtm_g
+gLAYER=d8
+gOUTLAYER=accum
+gTEMPDIR=/oasis/scratch/comet/rbarnes1/temp_project/temp/$gDATASET
+
+echo "###############"
+echo "#FULL DATASET"
+echo "###############"
+
+. ./generic_job.sh
+
+gEVICT=$gTEMPDIR
+
+. ./generic_job.sh
+
+
+echo "###############"
+echo "#STRONG SCALING"
+echo "###############"
+
+gLAYOUTNAME=srtm-39.layout
+
+gMPIOPTS=-n 40
+. ./generic_job.sh
+
+gMPIOPTS=-n 33
+. ./generic_job.sh
+
+gMPIOPTS=-n 17
+. ./generic_job.sh
+
+gMPIOPTS=-n 9 
+. ./generic_job.sh
+
+gMPIOPTS=-n 5 
+. ./generic_job.sh
+
+gMPIOPTS=-n 3 
+. ./generic_job.sh
+
+gMPIOPTS=-n 2 
+. ./generic_job.sh
+
+
+
+
+
+echo "###############"
+echo "WEAK SCALING"
+echo "###############"
+
+gMPIOPTS=-n 40
+gLAYOUTNAME=srtm-39.layout
+. ./generic_job.sh
+
+gMPIOPTS=-n 33
+gLAYOUTNAME=srtm-32.layout
+. ./generic_job.sh
+
+gMPIOPTS=-n 24
+gLAYOUTNAME=srtm-23.layout
+. ./generic_job.sh
+
+gMPIOPTS=-n 17
+gLAYOUTNAME=srtm-16.layout
+. ./generic_job.sh
+
+gMPIOPTS=-n 9 
+gLAYOUTNAME=srtm-8.layout 
+. ./generic_job.sh
+
+gMPIOPTS=-n 5 
+gLAYOUTNAME=srtm-4.layout 
+. ./generic_job.sh
+
+gMPIOPTS=-n 3 
+gLAYOUTNAME=srtm-2.layout 
+. ./generic_job.sh
+
+gMPIOPTS=-n 2 
+gLAYOUTNAME=srtm-1.layout 
+. ./generic_job.sh

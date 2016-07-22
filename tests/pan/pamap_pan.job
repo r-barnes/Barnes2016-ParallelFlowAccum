@@ -1,0 +1,95 @@
+#!/bin/bash  
+#SBATCH --job-name="pamap_pan"  
+#SBATCH --output="pamap_pan.%j.%N.out"  
+#SBATCH --partition=compute  
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=24  
+#SBATCH --export=ALL  
+#SBATCH -t 48:00:00
+
+gMPI=mpirun
+gEXE=/home/rbarnes1/temp/parallel_d8_accum.exe
+gLAYOUTNAME=layout.layout
+gONEMANY=many
+gEVICT=@evict
+gDATASET=pamap_pan
+gLAYER=d8
+gOUTLAYER=accum
+gTEMPDIR=/oasis/scratch/comet/rbarnes1/temp_project/temp/$gDATASET
+
+echo "###############"
+echo "#FULL DATASET"
+echo "###############"
+
+. ./generic_job.sh
+
+gEVICT=$gTEMPDIR
+
+. ./generic_job.sh
+
+
+echo "###############"
+echo "#STRONG SCALING"
+echo "###############"
+
+gLAYOUTNAME=pan-44.layout
+
+
+gMPIOPTS=-n 48 
+. ./generic_job.sh
+
+gMPIOPTS=-n 33 
+. ./generic_job.sh
+
+gMPIOPTS=-n 17 
+. ./generic_job.sh
+
+gMPIOPTS=-n 9 
+. ./generic_job.sh
+
+gMPIOPTS=-n 5 
+. ./generic_job.sh
+
+gMPIOPTS=-n 3 
+. ./generic_job.sh
+
+gMPIOPTS=-n 2 
+. ./generic_job.sh
+
+
+echo "###############"
+echo "WEAK SCALING"
+echo "###############"
+
+
+gMPIOPTS=-n 45 
+gLAYOUTNAME=pan-44.layout
+. ./generic_job.sh
+
+gMPIOPTS=-n 33 
+gLAYOUTNAME=pan-32.layout
+. ./generic_job.sh
+
+gMPIOPTS=-n 24 
+gLAYOUTNAME=pan-23.layout
+. ./generic_job.sh
+
+gMPIOPTS=-n 17 
+gLAYOUTNAME=pan-16.layout
+. ./generic_job.sh
+
+gMPIOPTS=-n 9  
+gLAYOUTNAME=pan-8.layout
+. ./generic_job.sh
+
+gMPIOPTS=-n 5  
+gLAYOUTNAME=pan-4.layout
+. ./generic_job.sh
+
+gMPIOPTS=-n 3  
+gLAYOUTNAME=pan-2.layout
+. ./generic_job.sh
+
+gMPIOPTS=-n 2  
+gLAYOUTNAME=pan-1.layout
+. ./generic_job.sh

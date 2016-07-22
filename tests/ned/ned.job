@@ -1,0 +1,89 @@
+#!/bin/bash  
+#SBATCH --job-name="ned"  
+#SBATCH --output="ned.%j.%N.out"  
+#SBATCH --partition=compute  
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=24  
+#SBATCH --export=ALL  
+#SBATCH -t 48:00:00
+
+gMPI=mpirun
+gEXE=/home/rbarnes1/temp/parallel_d8_accum.exe
+gLAYOUTNAME=layout.layout
+gONEMANY=many
+gEVICT=@evict
+gDATASET=ned
+gLAYER=d8
+gOUTLAYER=accum
+gTEMPDIR=/oasis/scratch/comet/rbarnes1/temp_project/temp/$gDATASET
+
+echo "###############"
+echo "#FULL DATASET"
+echo "###############"
+
+. ./generic_job.sh
+
+gEVICT=$gTEMPDIR
+
+. ./generic_job.sh
+
+gEVICT=@evict
+
+
+echo "###############"
+echo "#STRONG SCALING"
+echo "###############"
+
+gLAYOUTNAME=ned-19.layout
+
+gMPIOPTS=-n 48
+. ./generic_job.sh
+
+gMPIOPTS=-n 33
+. ./generic_job.sh
+
+gMPIOPTS=-n 17
+. ./generic_job.sh
+
+gMPIOPTS=-n 9 
+. ./generic_job.sh
+
+gMPIOPTS=-n 5 
+. ./generic_job.sh
+
+gMPIOPTS=-n 3 
+. ./generic_job.sh
+
+gMPIOPTS=-n 2 
+. ./generic_job.sh
+
+
+
+
+echo "###############"
+echo "WEAK SCALING"
+echo "###############"
+
+gMPIOPTS=-n 20
+gLAYOUTNAME=ned-19.layout
+. ./generic_job.sh
+
+gMPIOPTS=-n 17
+gLAYOUTNAME=ned-16.layout
+. ./generic_job.sh
+
+gMPIOPTS=-n 9 
+gLAYOUTNAME=ned-8.layout 
+. ./generic_job.sh
+
+gMPIOPTS=-n 5 
+gLAYOUTNAME=ned-4.layout 
+. ./generic_job.sh
+
+gMPIOPTS=-n 3 
+gLAYOUTNAME=ned-2.layout 
+. ./generic_job.sh
+
+gMPIOPTS=-n 2 
+gLAYOUTNAME=ned-1.layout 
+. ./generic_job.sh
