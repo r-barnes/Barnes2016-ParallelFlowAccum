@@ -1,0 +1,32 @@
+#!/bin/bash  
+#SBATCH --job-name="srtm_r2"  
+#SBATCH --output="srtm_r2.%j.%N.out"  
+#SBATCH --partition=compute  
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=24  
+#SBATCH --export=ALL  
+#SBATCH -t 00:30:00
+
+gMPI=mpirun
+gEXE=/home/rbarnes1/temp/parallel_d8_accum.exe
+gLAYOUTNAME=layout.layout
+gONEMANY=many
+gEVICT=@evict
+gDATASET=srtm_r2
+gLAYER=d8
+gOUTLAYER=accum
+gTEMPDIR=/scratch/$USER/$SLURM_JOBID/$gDATASET
+
+echo "###############"
+echo "#FULL DATASET"
+echo "###############"
+
+gEVICT=@evict
+. ./generic_job.sh
+
+gEVICT=@retain
+. ./generic_job.sh
+
+gEVICT=$gTEMPDIR
+. ./generic_job.sh
+
