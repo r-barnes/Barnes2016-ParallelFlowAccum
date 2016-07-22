@@ -16,4 +16,4 @@ mkdir -p /oasis/scratch/comet/rbarnes1/temp_project/temp/srtm_gr
 rm -rf   /oasis/scratch/comet/rbarnes1/temp_project/output/srtm_gr
 mkdir -p /oasis/scratch/comet/rbarnes1/temp_project/output/srtm_gr
 
-/home/rbarnes1/temp/parallel_flats.exe /oasis/scratch/comet/rbarnes1/temp_project/srtm_global_resampled/filled/srtm_global_resampled.layout 150  /oasis/scratch/comet/rbarnes1/temp_project/temp/srtm_gr/sgr-%f.tif /oasis/scratch/comet/rbarnes1/temp_project/output/srtm_gr/%f-d8.tif noflip
+/home/rbarnes1/temp/parallel_flats.exe /oasis/scratch/comet/rbarnes1/temp_project/srtm_global_resampled/filled/srtm_global_resampled.layout 150  /scratch/$USER/$SLURM_JOBID/sgr-%f.tif /oasis/scratch/comet/rbarnes1/temp_project/output/srtm_gr/%f-d8.tif noflip
