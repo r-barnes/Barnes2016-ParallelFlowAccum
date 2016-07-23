@@ -16,17 +16,18 @@ gDATASET=srtm_r1
 gLAYER=d8
 gOUTLAYER=accum
 gTEMPDIR=/scratch/$USER/$SLURM_JOBID/$gDATASET
+gCORES=24
 
 echo "###############"
 echo "#FULL DATASET"
 echo "###############"
 
 gEVICT=@evict
-. ./generic_job.sh
+. ../generic_job.sh
 
 gEVICT=@retain
-. ./generic_job.sh
+. ../generic_job.sh
 
 gEVICT=$gTEMPDIR
-. ./generic_job.sh
+. ../generic_job.sh
 

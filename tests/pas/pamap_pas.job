@@ -16,16 +16,17 @@ gDATASET=pamap_pas
 gLAYER=d8
 gOUTLAYER=accum
 gTEMPDIR=/oasis/scratch/comet/rbarnes1/temp_project/temp/$gDATASET
+gCORES=48
 
 echo "###############"
 echo "#FULL DATASET"
 echo "###############"
 
-. ./generic_job.sh
+. ../generic_job.sh
 
 gEVICT=$gTEMPDIR
 
-. ./generic_job.sh
+. ../generic_job.sh
 
 gEVICT=@evict
 
@@ -37,26 +38,26 @@ echo "###############"
 gLAYOUTNAME=pas-44.layout
 
 
-gMPIOPTS=-n 48 
-. ./generic_job.sh
+gCORES=48 
+. ../generic_job.sh
 
-gMPIOPTS=-n 33 
-. ./generic_job.sh
+gCORES=33 
+. ../generic_job.sh
 
-gMPIOPTS=-n 17 
-. ./generic_job.sh
+gCORES=17 
+. ../generic_job.sh
 
-gMPIOPTS=-n 9  
-. ./generic_job.sh
+gCORES=9  
+. ../generic_job.sh
 
-gMPIOPTS=-n 5  
-. ./generic_job.sh
+gCORES=5  
+. ../generic_job.sh
 
-gMPIOPTS=-n 3  
-. ./generic_job.sh
+gCORES=3  
+. ../generic_job.sh
 
-gMPIOPTS=-n 2  
-. ./generic_job.sh
+gCORES=2  
+. ../generic_job.sh
 
 
 echo "###############"
@@ -64,34 +65,34 @@ echo "WEAK SCALING"
 echo "###############"
 
 
-gMPIOPTS=-n 45 
+gCORES=45 
 gLAYOUTNAME=pas-44.layout
-. ./generic_job.sh
+. ../generic_job.sh
 
-gMPIOPTS=-n 33 
+gCORES=33 
 gLAYOUTNAME=pas-32.layout
-. ./generic_job.sh
+. ../generic_job.sh
 
-gMPIOPTS=-n 24 
+gCORES=24 
 gLAYOUTNAME=pas-23.layout
-. ./generic_job.sh
+. ../generic_job.sh
 
-gMPIOPTS=-n 17 
+gCORES=17 
 gLAYOUTNAME=pas-16.layout
-. ./generic_job.sh
+. ../generic_job.sh
 
-gMPIOPTS=-n 9  
+gCORES=9  
 gLAYOUTNAME=pas-8.layout 
-. ./generic_job.sh
+. ../generic_job.sh
 
-gMPIOPTS=-n 5  
+gCORES=5  
 gLAYOUTNAME=pas-4.layout 
-. ./generic_job.sh
+. ../generic_job.sh
 
-gMPIOPTS=-n 3  
+gCORES=3  
 gLAYOUTNAME=pas-2.layout 
-. ./generic_job.sh
+. ../generic_job.sh
 
-gMPIOPTS=-n 2  
+gCORES=2  
 gLAYOUTNAME=pas-1.layout 
-. ./generic_job.sh
+. ../generic_job.sh
