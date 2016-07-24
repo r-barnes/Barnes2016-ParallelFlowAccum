@@ -28,10 +28,12 @@ gEVICT=$gTEMPDIR
 
 . ../generic_job.sh
 
+gEVICT=@evict
 
 echo "###############"
 echo "#STRONG SCALING"
 echo "###############"
+
 
 gLAYOUTNAME=pan-44.layout
 

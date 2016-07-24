@@ -28,6 +28,7 @@ gEVICT=$gTEMPDIR
 
 . ../generic_job.sh
 
+gEVICT=@evict
 
 echo "###############"
 echo "#STRONG SCALING"
