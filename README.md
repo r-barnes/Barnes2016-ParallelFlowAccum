@@ -2,17 +2,17 @@ Barnes2016-DistributedPriorityFlood
 ===================================
 
 **Title of Manuscript**:
-Flexibly Distributed Priority-Flood Depression Filling For Teracell DEMs
+Parallel Non-divergent Flow Accumulation For Trillion Cell Digital Elevation Models On Desktops Or Clusters
 
 **Authors**: Richard Barnes
 
-**Corresponding Author**: Richard Barnes (rbarnes@umn.edu)
+**Corresponding Author**: Richard Barnes (richard.barnes@berkeley.edu)
 
 **DOI Number of Manuscript**
 TODO
 
 **Code Repositories**
- * [Author's GitHub Repository](https://github.com/r-barnes/Barnes2016-ParallelPriorityFlood)
+ * [Author's GitHub Repository](https://github.com/r-barnes/Barnes2016-ParallelFlowAccum)
  * [Journal's GitHub Repository](TODO)
 
 This repository contains a reference implementation of the algorithms presented
@@ -24,25 +24,21 @@ datasets used, and code to perform correctness tests.
 
 Abstract
 --------
-High-resolution digital elevation models (DEMs) are increasingly available;
-however, attempts to use these in existing hydroanalysis algorithms has created
-problems which take too long to solve and which are too big to fit into a
-computer's working memory. This has led to research on parallel algorithms and
-algorithms which explicitly manage memory. Parallel approaches do not scale well
-because they require many nodes and frequent communication between these nodes.
-Memory-managing algorithms have to read and write subdivisions of the data
-numerous times because they suffer from low access locality. Here, I adopt a
-tile-based approach which unifies the parallel and memory-managing paradigms. I
-show that it is possible to **perform depression-filling on a tiled DEM with a
-fixed number of memory access and communication events per tile**, regardless of
-the size of the DEM. The result is an algorithm that works equally well on one
-core, multiple cores, or multiple machines and can take advantage of large
-memories or cope with small ones. The largest dataset on which I run the
-algorithm has 2 trillion (2*10^12) cells. With 48 cores, processing required 291
-minutes to completion and 9.4 compute-days. This test is three orders of
-magnitude larger than any previously performed in the literature, but took only
-1-2 orders of magnitude more compute-time. Complete, well-commented source code
-and correctness tests are available for download from a repository.
+
+Continent-scale datasets challenge hydrological algorithms for processing
+digital elevation models. Flow accumulation is an important input for many such
+algorithms; here, I parallelize its calculation. The new algorithm works on one
+or many cores, or multiple machines, and can take advantage of large memories or
+cope with small ones. Unlike previous algorithms, the new algorithm guarantees a
+fixed number of memory access and communication events per raster cell. In
+testing, the new algorithm ran faster and used fewer resources than previous
+algorithms exhibiting ∼30% strong and weak scaling efficiencies up to 48 cores
+and linear scaling across datasets ranging over three orders of magnitude. The
+largest dataset tested has two trillion (2 · 10^12) cells. With 48 cores,
+processing required 24 minutes wall-time (14.5 compute-hours). This test is
+three orders of magnitude larger than any previously performed in the
+literature. Complete, well-commented source code and correctness tests are
+available for download from Github.
 
 
 
@@ -71,7 +67,7 @@ Note that temporary files can be stored in:
 
 or some similar directory.
 
-Running `make` will produce an executable called `parallel_pf.exe`.
+Running `make` will produce an executable called `parallel_d8_accum.exe`.
 
 Running the above compiles the program to run the _cache_ strategy. Using `make
 compile_with_compression` will enable the _cacheC_ strategy instead. This
@@ -85,14 +81,14 @@ library. This libary can be installed with:
 Running the Program
 -------------------
 
-`parallel_pf.exe` can be run without arguments from the command line to show a
-comprehensive explanation of the program and its options. This same text is in
-the file `help.txt`.
+`parallel_d8_accum.exe` can be run without arguments from the command line to
+show a comprehensive explanation of the program and its options. This same text
+is in the file `help.txt`.
 
-In order to process data, you will need to run `parallel_pf.exe` in MPI. For
-example:
+In order to process data, you will need to run `parallel_d8_accum.exe` in MPI.
+For example:
 
-    mpirun -n 4 ./parallel_pf.exe one @offloadall dem.tif outroot -w 500 -h 500
+    mpirun -n 4 ./parallel_d8_accum.exe one @offloadall dem.tif outroot -w 500 -h 500
 
 In the foregoing example `-n 4` indicates that the program should be run in
 parallel over four processes. One of these processes (the one with MPI rank #0)
@@ -113,11 +109,11 @@ A layout file is a text file with the format:
 
 where each of fileX.tif is a tile of the larger DEM collectively described by
 all of the files. All of fileX.tif must have the same shape; the layout file
-specifies how fileX.tif are arranged in relation to each other in space.
-Blanks between commas indicate that there is no tile there: the algorithm will
-treat such gaps as places to route flow towards (as if they are oceans). Note
-that the files need not have TIF format: they can be of any type which GDAL
-can read. Paths to fileX.tif are taken to be relative to the layout file.
+specifies how fileX.tif are arranged in relation to each other in space. Blanks
+between commas indicate that there is no tile there: the algorithm will treat
+such gaps as places to route flow towards (as if they are oceans). Note that the
+files need not have TIF format: they can be of any type which GDAL can read.
+Paths to fileX.tif are taken to be relative to the layout file.
 
 Several example layout files are included in the `tests/` directory and end with
 the `.layout` extension.
@@ -146,7 +142,7 @@ with the program. To do so, run the following line immediately before launching
 Although the program tracks its maximum memory requirements internally, I have
 also used `/usr/bin/time` to record this. An example of such an invocation is:
 
-    mpirun -output-filename timing -n 4 /usr/bin/time -v ./parallel_pf.exe one @offloadall dem.tif outroot -w 500 -h 500
+    mpirun -output-filename timing -n 4 /usr/bin/time -v ./parallel_d8_accum.exe one @offloadall dem.tif outroot -w 500 -h 500
 
 This will store memory and timing information in files beginning with the stem
 `timing`.
@@ -206,11 +202,3 @@ This code is part of the RichDEM codebase, which includes state of the art
 algorithms for quickly performing hydrologic calculations on raster digital
 elevation models. The full codebase is available at
 [https://github.com/r-barnes](https://github.com/r-barnes)
-
-
-
-TODO
-----
-
-Different MPI Polling methods
-https://stackoverflow.com/questions/14560714/probe-seems-to-consume-the-cpu
