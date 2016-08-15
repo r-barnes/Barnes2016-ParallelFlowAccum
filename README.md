@@ -1,5 +1,5 @@
-Barnes2016-DistributedPriorityFlood
-===================================
+Barnes2016-ParallelFlowAccum
+============================
 
 **Title of Manuscript**:
 Parallel Non-divergent Flow Accumulation For Trillion Cell Digital Elevation Models On Desktops Or Clusters
