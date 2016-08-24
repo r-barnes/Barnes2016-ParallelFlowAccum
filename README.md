@@ -88,7 +88,7 @@ is in the file `help.txt`.
 In order to process data, you will need to run `parallel_d8_accum.exe` in MPI.
 For example:
 
-    mpirun -n 4 ./parallel_d8_accum.exe one @offloadall dem.tif outroot -w 500 -h 500
+    mpirun -n 4 ./parallel_d8_accum.exe many @evict dem.layout outroot/%f.tif
 
 In the foregoing example `-n 4` indicates that the program should be run in
 parallel over four processes. One of these processes (the one with MPI rank #0)
