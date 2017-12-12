@@ -77,8 +77,8 @@ library. This libary can be installed with:
 Further details
 ---------------
 
-For further details on testing, layout files, and so on, please see
-[src/README.md](src/README.md).
+For further details on testing, layout files, and so on, please see the source code's
+[README.md](https://github.com/r-barnes/richdem/blob/master/programs/parallel_d8_accum/README.md).
 
 
 
