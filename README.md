@@ -8,8 +8,8 @@ Parallel Non-divergent Flow Accumulation For Trillion Cell Digital Elevation Mod
 
 **Corresponding Author**: Richard Barnes (richard.barnes@berkeley.edu)
 
-**DOI Number of Manuscript**
-TODO
+**DOI Number of Manuscript**:
+[10.1016/j.envsoft.2017.02.022](http://dx.doi.org/10.1016/j.envsoft.2017.02.022)
 
 **Code Repositories**
  * [Author's GitHub Repository](https://github.com/r-barnes/Barnes2016-ParallelFlowAccum)
