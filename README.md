@@ -13,7 +13,6 @@ Parallel Non-divergent Flow Accumulation For Trillion Cell Digital Elevation Mod
 
 **Code Repositories**
  * [Author's GitHub Repository](https://github.com/r-barnes/Barnes2016-ParallelFlowAccum)
- * [Journal's GitHub Repository](TODO)
 
 This repository contains a reference implementation of the algorithms presented
 in the manuscript above, along with information on acquiring the various
