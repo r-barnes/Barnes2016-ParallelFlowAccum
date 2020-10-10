@@ -1,3 +1,5 @@
+## This repo is archived. Please use the version in https://github.com/r-barnes/richdem for your research.
+
 Barnes2016-ParallelFlowAccum
 ============================
 
